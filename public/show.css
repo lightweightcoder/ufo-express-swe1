@@ -1,0 +1,30 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 40px;
+}
+
+#sighting-header {
+  text-align: center;
+}
+
+#sighting-header-container {
+  margin-top: 30px;
+}
+
+#sighting-data-container {
+  margin-top: 30px;
+  background: lightgreen;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#info {
+  background: lightskyblue;
+  padding: 10px;
+}
+
+@media (max-width: 1200px) {
+  #form-container {
+    width: 1200px;
+  }
+}

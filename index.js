@@ -22,7 +22,7 @@ app.use(express.static('public'));
 
 // Routes =============================================================
 
-// start of functionality for user to create a new recipe by filling up a form ------------
+// start of functionality for user to create a new sighting by filling up a form ------------
 
 // render the form (sighting.ejs) that will create the request
 app.get('/sighting', (request, response) => {
@@ -33,8 +33,6 @@ app.get('/sighting', (request, response) => {
 // 1st param: the url that the post request is coming from
 // 2nd param: callback to execute when post request is made
 app.post('/sighting', (request, response) => {
-  console.log('request body', request.body);
-
   // add an element to the sightings array in data.json
   add('data.json', 'sightings', request.body, (data, error) => {
     // check for errors
@@ -47,6 +45,34 @@ app.post('/sighting', (request, response) => {
     response.send('(POST) added new sighting!');
   });
 });
+
+// end of functionality for user to create a new sighting by filling up a form ----------
+// --------------------------------------------------------------------------------------
+
+// start of functionality for user to display a single sighting -------------------------
+
+app.get('/sighting/:index', (request, response) => {
+  console.log('request to show sighting received');
+
+  // read the data.json file
+  read('data.json', (data) => {
+    console.log('done with reading');
+
+    // get the index param
+    const { index } = request.params;
+
+    // get out the sighting
+    const sighting = data.sightings[index];
+
+    // store sighting in an object
+    const templateData = { sighting };
+
+    // render the form, pass in the template data
+    response.render('show', templateData);
+  });
+});
+
+// end of functionality for user to display a single sighting -------------------------
 
 // set the port to listen for requests
 app.listen(PORT);
