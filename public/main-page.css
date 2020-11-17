@@ -1,0 +1,19 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 40px;
+}
+
+#sort-sightings-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+#sighting-list-container {
+  margin-top: 30px;
+}
+
+#sighting-list-header {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+}

@@ -20,6 +20,13 @@ app.use(methodOverride('_method'));
 // config to allow use of public folder
 app.use(express.static('public'));
 
+// helper function to sort sightings by date (ascending or descending ) ----------------------------
+// const sortDataByDate = () => {
+
+// };
+
+// end of functionality for user to sort sightings by date  ---------------------------------
+
 // Routes =============================================================
 
 // start of functionality for user to create a new sighting by filling up a form ------------
@@ -41,8 +48,11 @@ app.post('/sighting', (request, response) => {
       return;
     }
 
-    // send back an acknowledgement
-    response.send('(POST) added new sighting!');
+    // get the index of the new sighting
+    const lastIndex = data.sightings.length - 1;
+
+    // redirect the webpage to newly created sighting
+    response.redirect(`/sighting/${lastIndex}`);
   });
 });
 
@@ -52,8 +62,6 @@ app.post('/sighting', (request, response) => {
 // start of functionality for user to display a single sighting -------------------------
 
 app.get('/sighting/:index', (request, response) => {
-  console.log('request to show sighting received');
-
   // read the data.json file
   read('data.json', (data) => {
     console.log('done with reading');
@@ -73,6 +81,87 @@ app.get('/sighting/:index', (request, response) => {
 });
 
 // end of functionality for user to display a single sighting -------------------------
+// ------------------------------------------------------------------------------------
+
+// start of functionality for user to display a list (all) of sightings -----------------
+
+app.get('/', (request, response) => {
+  console.log('request to render list of sightings came in');
+
+  // read the data.json file
+  read('data.json', (data) => {
+    console.log('done with reading');
+
+    // render the form, pass in the template data
+    response.render('main-page', data);
+  });
+});
+
+// end of functionality for user to display a list (all) of sightings -------------------
+// --------------------------------------------------------------------------------------
+
+// start of functionality for user to delete a sighting  ---------------------------------
+app.delete('/sighting/:index/delete', (request, response) => {
+  const { index } = request.params;
+
+  read('data.json', (data) => {
+    // take a thing out of the array
+    data.sightings.splice(index, 1);
+
+    write('data.json', data, (doneData) => {
+      response.send('done deleting! Go to http://localhost:3004/ to go back to the main page');
+    });
+  });
+});
+
+// end of functionality for user to delete a sighting ------------------------------------
+//----------------------------------------------------------------------
+
+// start of functionality for user to edit a sighting  ---------------------------------
+// render the form (edit.js) that will edit the sighting
+app.get('/sighting/:index/edit', (request, response) => {
+  console.log('edit request came in');
+
+  // read the JSON file
+  read('data.json', (data) => {
+    console.log('done with reading');
+
+    // get the index param
+    const { index } = request.params;
+
+    // get out the sighting
+    const sighting = data.sightings[index];
+
+    // add an index key to the recipe so we can use it in edit.ejs
+    sighting.index = index;
+
+    // put sighting (as a key-value pair) into an object
+    const templateData = { sighting };
+
+    // render the form, pass in the sighting
+    response.render('edit', templateData);
+  });
+});
+
+// set the route that will accept a request to edit the sighting
+app.put('/sighting/:index/edit', (request, response) => {
+  const { index } = request.params;
+
+  read('data.json', (data) => {
+    // completely replace the sighting obj of the coressponding index here
+    data.sightings[index] = request.body;
+
+    write('data.json', data, (doneData) => {
+      // redirect the webpage to newly created sighting
+      // note: nodemon will not work because it will cause
+      // the server to reload when data.json is modified
+      response.redirect(`/sighting/${index}`);
+    });
+  });
+});
+
+// end of functionality for user to edit a sighting  ---------------------------------
+// -----------------------------------------------------------------------
 
 // set the port to listen for requests
 app.listen(PORT);

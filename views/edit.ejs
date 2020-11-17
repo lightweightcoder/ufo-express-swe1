@@ -17,7 +17,7 @@
     />
 
     <!-- My own css -->
-    <link rel="stylesheet" href="/main-page.css" />
+    <link rel="stylesheet" href="/edit.css" />
 
     <title>Sightings</title>
   </head>
@@ -43,64 +43,79 @@
       </div>
     </nav>
 
-    <div class="container" id="sort-sightings-container">
-      <div class="row justify-content-center">
-        <div class="col-10">
-          <h1>Sightings</h1>
-        </div>
-      </div>
-
-      <div class="row justify-content-center">
-        <div class="col-10" id="sort-drop-down">
-          <p>sort drop down</p>
-        </div>
-        <div class="col-10" id="submit-sort">
-          <p>Submit</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="container" id="sightings-list-container">
-      <div class="row justify-content-center">
-        <div class="col-10">
-          <h1 id="sighting-list-header">Sightings List</h1>
+    <div class="container" id="form-container">
+      <div class="row">
+        <div class="col">
+          <h1>Form</h1>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-5">
-          <h4>Date</h4>
-        </div>
-        <div class="col-3">
-          <h4>Shape</h4>
-        </div>
-        <div class="col-3">
-          <h4>City</h4>
-        </div>
-        <div class="col-1"></div>
-      </div>
-
-      <% sightings.forEach((element) => { %>
-      <div class="row">
-        <div class="col-5">
-          <p><%= element.date_time %></p>
-        </div>
-        <div class="col-3">
-          <p><%= element.shape %></p>
-        </div>
-        <div class="col-3">
-          <p><%= element.city %></p>
-        </div>
-        <div class="col-1">
+        <div class="col">
           <form
-            action="sighting/<%= sightings.indexOf(element) %>/delete?_method=DELETE"
+            action="/sighting/<%= sighting.index %>/edit?_method=PUT"
             method="POST"
           >
-            <input type="submit" value="Delete" />
+            <label for="text">text:</label><br />
+            <input
+              type="text"
+              id="text"
+              name="text"
+              value="<%= sighting.text %>"
+              class="form-control"
+            /><br />
+            <label for="date_time">date_time - (DD/MM/YY) (HH:MM):</label><br />
+            <input
+              type="text"
+              id="date_time"
+              name="date_time"
+              value="<%= sighting.date_time %>"
+              class="form-control"
+            /><br />
+            <label for="city">city:</label><br />
+            <input
+              type="text"
+              id="city"
+              name="city"
+              value="<%= sighting.city %>"
+              class="form-control"
+            /><br />
+            <label for="state">state:</label><br />
+            <input
+              type="text"
+              id="state"
+              name="state"
+              value="<%= sighting.state %>"
+              class="form-control"
+            /><br />
+            <label for="shape">shape:</label><br />
+            <input
+              type="text"
+              id="shape"
+              name="shape"
+              value="<%= sighting.shape %>"
+              class="form-control"
+            /><br />
+            <label for="duration">duration (minutes):</label><br />
+            <input
+              type="text"
+              id="duration"
+              name="duration"
+              value="<%= sighting.duration %>"
+              class="form-control"
+            /><br />
+            <label for="summary">summary:</label><br />
+            <input
+              type="text"
+              id="summary"
+              name="summary"
+              value="<%= sighting.summary %>"
+              class="form-control"
+            /><br />
+            <input type="submit" value="Submit" /><br />
           </form>
         </div>
       </div>
-      <% }); %>
     </div>
 
     <!-- Bootstrap JS -->
