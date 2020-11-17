@@ -102,6 +102,8 @@ app.get('/', (request, response) => {
 
 // start of functionality for user to delete a sighting  ---------------------------------
 app.delete('/sighting/:index/delete', (request, response) => {
+  console.log('delete request came in');
+
   const { index } = request.params;
 
   read('data.json', (data) => {
@@ -109,7 +111,7 @@ app.delete('/sighting/:index/delete', (request, response) => {
     data.sightings.splice(index, 1);
 
     write('data.json', data, (doneData) => {
-      response.send('done deleting! Go to http://localhost:3004/ to go back to the main page');
+      response.redirect('/');
     });
   });
 });
