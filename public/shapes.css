@@ -1,0 +1,23 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 40px;
+}
+
+#sighting-shapes-header {
+  text-align: center;
+}
+
+#sighting-shapes-header-container {
+  margin-top: 30px;
+}
+
+#sighting-shapes-list-container {
+  margin-top: 30px;
+  background: lightgreen;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#shape-list-items {
+  margin-bottom: 0;
+}

@@ -22,9 +22,3 @@ body {
   background: lightskyblue;
   padding: 10px;
 }
-
-@media (max-width: 1200px) {
-  #form-container {
-    width: 1200px;
-  }
-}

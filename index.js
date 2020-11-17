@@ -76,7 +76,7 @@ app.get('/sighting/:index', (request, response) => {
     const templateData = { sighting };
 
     // render the form, pass in the template data
-    response.render('show', templateData);
+    response.render('show-sighting', templateData);
   });
 });
 
@@ -162,6 +162,79 @@ app.put('/sighting/:index/edit', (request, response) => {
 
 // end of functionality for user to edit a sighting  ---------------------------------
 // -----------------------------------------------------------------------
+
+// start of functionality to render a list of sighting shapes ------------------------
+
+// render the list of sighting shapes
+app.get('/shapes', (request, response) => {
+  console.log('get request for list of shapes came in');
+
+  // read the JSON file
+  read('data.json', (data) => {
+    console.log('done with reading');
+
+    // array to store the shapes of UFOs
+    const shapes = [];
+
+    // search for all the UFO shapes in data.json and store them
+    data.sightings.forEach((sighting) => {
+      // change letter of shape to lwoer case
+      const shapeLowerCase = sighting.shape.toLowerCase();
+
+      // returns true if there is already another of the same shape
+      const isThereThisShape = shapes.includes(shapeLowerCase);
+
+      // add shape if it has not been added before
+      if (isThereThisShape === false) {
+        shapes.push(shapeLowerCase);
+      }
+    });
+
+    const templateData = { shapes };
+
+    // render the shapes list, pass in the object containing shapes array
+    response.render('shapes', templateData);
+  });
+});
+// end of functionality fto render a list of sighting shapes --------------------------
+// ------------------------------------------------------------------------------------
+
+// start of functionality to render a list of sightings of a particular shape -------------------
+
+// render the list of sightings of the requested shape
+app.get('/shapes/:shape', (request, response) => {
+  console.log('get request for list of shapes came in');
+
+  // read the JSON file
+  read('data.json', (data) => {
+    console.log('done with reading');
+
+    // store the requested shape (in lower caps)
+    const requestedShape = request.params.shape;
+
+    // to store sightings that report UFOs of the requested shape
+    const sightingsOfRequestedShape = [];
+
+    // filter out the sightings that contain the requested shape
+    data.sightings.forEach((sighting, index) => {
+      const currentShape = sighting.shape.toLowerCase();
+
+      // if the UFO shape of this sighting is the requested shape
+      // add into array of sightings to be displayed
+      if (currentShape === requestedShape) {
+        sighting.index = index;
+        sightingsOfRequestedShape.push(sighting);
+      }
+    });
+
+    const templateData = { sightingsOfRequestedShape };
+
+    // render the shapes list, pass in the object containing shapes array
+    response.render('shapes-filtered', templateData);
+  });
+});
+// end of functionality to render a list of sightings of a particular shape -----------
+// ------------------------------------------------------------------------------------
 
 // set the port to listen for requests
 app.listen(PORT);
