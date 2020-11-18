@@ -53,6 +53,24 @@
       "shape": "Sphere",
       "duration": "1 minute",
       "summary": "Yellow UFO"
+    },
+    {
+      "text": "Green UFO in the sky outside the house. ",
+      "date_time": "14/12/20 03:00",
+      "city": "Singapore",
+      "state": "Singapore",
+      "shape": "Fireball",
+      "duration": "1 minute",
+      "summary": "Green UFO"
+    },
+    {
+      "text": "Purple UFO in the sky outside the house. ",
+      "date_time": "15/12/20 04:00",
+      "city": "Singapore",
+      "state": "Singapore",
+      "shape": "Circle",
+      "duration": "4 minutes",
+      "summary": "Purple UFO"
     }
   ]
 }

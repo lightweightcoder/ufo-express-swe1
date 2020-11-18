@@ -20,10 +20,51 @@ app.use(methodOverride('_method'));
 // config to allow use of public folder
 app.use(express.static('public'));
 
-// helper function to sort sightings by date (ascending or descending ) ----------------------------
-// const sortDataByDate = () => {
+// helper functions ====================================
+// to sort sightings by category
+// and order(ascending or descending) ----------------------------
+const sort = (sightings, category, order) => {
+  // check order first then category
+  if (order === 'asc') {
+    if (category === 'shape') {
+      // sort by shape in ascending alphabetical order
+      sightings.sort((a, b) => {
+        // ignore upper and lowercase
+        const aCategory = a[category].toUpperCase();
+        const bCategory = b[category].toUpperCase();
 
-// };
+        if (aCategory < bCategory) {
+          return -1;
+        }
+        if (aCategory > bCategory) {
+          return 1;
+        }
+
+        // for both sightings, values in that category are the same
+        return 0;
+      });
+    }
+  } else if (order === 'desc') {
+    if (category === 'shape') {
+      // sort by shape in descending alphabetical order
+      sightings.sort((a, b) => {
+        // ignore upper and lowercase
+        const aCategory = a[category].toUpperCase();
+        const bCategory = b[category].toUpperCase();
+
+        if (aCategory < bCategory) {
+          return 1;
+        }
+        if (aCategory > bCategory) {
+          return -1;
+        }
+
+        // for both sightings, values in that category are the same
+        return 0;
+      });
+    }
+  }
+};
 
 // end of functionality for user to sort sightings by date  ---------------------------------
 
@@ -92,6 +133,27 @@ app.get('/', (request, response) => {
   read('data.json', (data) => {
     console.log('done with reading');
 
+    // add an index to each sighting so we can use it
+    // in the delete request functionality in main-page.ejs and
+    // so that sorting will not mess up the sightings' indexes
+    data.sightings.forEach((sighting, index) => {
+      sighting.index = index;
+    });
+
+    // check if there is a query
+    if (request.query.sortby) {
+      // get the query array
+      // queryArray = [category, order]
+      const queryArray = request.query.sortby;
+
+      // sort sightings by the options in queryArray
+      sort(data.sightings, queryArray[0], queryArray[1]);
+
+      console.log('sorting done!');
+    }
+
+    console.log(data.sightings);
+
     // render the form, pass in the template data
     response.render('main-page', data);
   });
@@ -134,7 +196,7 @@ app.get('/sighting/:index/edit', (request, response) => {
     // get out the sighting
     const sighting = data.sightings[index];
 
-    // add an index key to the recipe so we can use it in edit.ejs
+    // add an index key to the sighting so we can use it in edit.ejs
     sighting.index = index;
 
     // put sighting (as a key-value pair) into an object
