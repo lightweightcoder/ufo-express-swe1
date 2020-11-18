@@ -26,7 +26,7 @@ app.use(express.static('public'));
 const sort = (sightings, category, order) => {
   // check order first then category
   if (order === 'asc') {
-    if (category === 'shape') {
+    if (category === 'shape' || category === 'city') {
       // sort by shape in ascending alphabetical order
       sightings.sort((a, b) => {
         // ignore upper and lowercase
@@ -45,7 +45,7 @@ const sort = (sightings, category, order) => {
       });
     }
   } else if (order === 'desc') {
-    if (category === 'shape') {
+    if (category === 'shape' || category === 'city') {
       // sort by shape in descending alphabetical order
       sightings.sort((a, b) => {
         // ignore upper and lowercase
@@ -142,12 +142,12 @@ app.get('/', (request, response) => {
 
     // check if there is a query
     if (request.query.sortby) {
-      // get the query array
-      // queryArray = [category, order]
-      const queryArray = request.query.sortby;
+      // get the queries
+      const category = request.query.sortby;
+      const order = request.query.sortOrder;
 
       // sort sightings by the options in queryArray
-      sort(data.sightings, queryArray[0], queryArray[1]);
+      sort(data.sightings, category, order);
 
       console.log('sorting done!');
     }
@@ -242,7 +242,7 @@ app.get('/shapes', (request, response) => {
 
     // search for all the UFO shapes in data.json and store them
     data.sightings.forEach((sighting) => {
-      // change letter of shape to lwoer case
+      // change letter of shape to lower case
       const shapeLowerCase = sighting.shape.toLowerCase();
 
       // returns true if there is already another of the same shape

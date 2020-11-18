@@ -52,10 +52,24 @@
 
       <div class="row justify-content-center">
         <div class="col-10" id="sort-drop-down">
-          <p>sort drop down</p>
-        </div>
-        <div class="col-10" id="submit-sort">
-          <p>Submit</p>
+          <form action="/" method="GET">
+            <label for="sortby">sort by:</label>
+            <select name="sortby" id="sortby" class="form-control" required>
+              <option value="shape">shape</option>
+              <option value="city">city</option>
+            </select>
+            <label for="sortOrder">order:</label>
+            <select
+              name="sortOrder"
+              id="sortOrder"
+              class="form-control"
+              required
+            >
+              <option value="asc">ascending</option>
+              <option value="desc">descending</option>
+            </select>
+            <input type="submit" value="Submit" />
+          </form>
         </div>
       </div>
     </div>
