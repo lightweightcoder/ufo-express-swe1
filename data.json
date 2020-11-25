@@ -46,15 +46,6 @@
       "summary": "Blue UFO"
     },
     {
-      "text": "Yellow UFO in the sky outside the house. ",
-      "date_time": "13/12/20 02:00",
-      "city": "Singapore",
-      "state": "Singapore",
-      "shape": "Sphere",
-      "duration": "1 minute",
-      "summary": "Yellow UFO"
-    },
-    {
       "text": "Green UFO in the sky outside the house. ",
       "date_time": "14/12/20 03:00",
       "city": "Singapore",
@@ -71,6 +62,24 @@
       "shape": "Circle",
       "duration": "4 minutes",
       "summary": "Purple UFO"
+    },
+    {
+      "text": "Black UFO in the sky outside the house.",
+      "date_time": "16/12/20 04:00",
+      "city": "Zimbabwe",
+      "state": "Zimbabwe",
+      "shape": "Fireball",
+      "duration": "5 minutes",
+      "summary": "Black UFO"
+    },
+    {
+      "text": "Gold UFO spotted in mountain in the next village",
+      "date_time": "10/02/20 23:00",
+      "city": "Kingsland",
+      "state": "Lance",
+      "shape": "Circle",
+      "duration": "2 minutes",
+      "summary": "Gold UFO"
     }
   ]
 }

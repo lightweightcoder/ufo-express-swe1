@@ -50,62 +50,66 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col">
-          <form action="/sighting" method="POST">
-            <label for="text">text:</label><br />
-            <input
-              type="text"
-              id="text"
-              name="text"
-              class="form-control"
-            /><br />
-            <label for="date_time">date_time - (DD/MM/YY) (HH:MM):</label><br />
-            <input
-              type="text"
-              id="date_time"
-              name="date_time"
-              class="form-control"
-            /><br />
-            <label for="city">city:</label><br />
-            <input
-              type="text"
-              id="city"
-              name="city"
-              class="form-control"
-            /><br />
-            <label for="state">state:</label><br />
-            <input
-              type="text"
-              id="state"
-              name="state"
-              class="form-control"
-            /><br />
-            <label for="shape">shape:</label><br />
-            <input
-              type="text"
-              id="shape"
-              name="shape"
-              class="form-control"
-            /><br />
-            <label for="duration">duration (minutes):</label><br />
-            <input
-              type="text"
-              id="duration"
-              name="duration"
-              class="form-control"
-            /><br />
-            <label for="summary">summary:</label><br />
-            <input
-              type="text"
-              id="summary"
-              name="summary"
-              class="form-control"
-            /><br />
-            <input type="submit" value="Submit" /><br />
-          </form>
+      <form action="/sighting" method="POST">
+        <div class="form-group">
+          <label for="text">text:</label><br />
+          <textarea id="text" name="text" rows="3" class="form-control"></textarea>
         </div>
-      </div>
+
+        <div class="form-group">
+          <label for="date_time">date_time - (DD/MM/YY) (HH:MM):</label><br />
+          <input
+            type="text"
+            id="date_time"
+            name="date_time"
+            class="form-control"
+          />
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md">
+            <div class="form-group">
+              <label for="city">city:</label><br />
+              <input type="text" id="city" name="city" class="form-control" />
+            </div>
+          </div>
+
+          <div class="col-12 col-md">
+            <div class="form-group">
+              <label for="state">state:</label><br />
+              <input type="text" id="state" name="state" class="form-control" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="shape">shape:</label><br />
+              <input type="text" id="shape" name="shape" class="form-control" />
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="form-group">
+              <label for="duration">duration (minutes):</label><br />
+              <input
+                type="text"
+                id="duration"
+                name="duration"
+                class="form-control"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="summary">summary:</label><br />
+          <textarea id="summary" name="summary" rows="2" class="form-control"></textarea>
+        </div>
+
+        <input type="submit" value="Submit" class="btn btn-outline-light" />
+      </form>
     </div>
 
     <!-- Bootstrap JS -->

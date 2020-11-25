@@ -21,6 +21,7 @@
 
     <title>Sightings</title>
   </head>
+
   <body>
     <nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-md">
       <a href="/" class="navbar-brand">Sightings</a>
@@ -43,18 +44,23 @@
       </div>
     </nav>
 
-    <div class="container" id="sort-sightings-container">
+    <div class="container-fluid" id="sort-sightings-container">
       <div class="row justify-content-center">
-        <div class="col-10">
+        <div class="col-12">
           <h1>Sightings</h1>
         </div>
-      </div>
 
-      <div class="row justify-content-center">
-        <div class="col-10" id="sort-drop-down">
-          <form action="/" method="GET">
+        <div class="col-12">
+          <form action="/" method="GET" id="sort-drop-down">
             <label for="sortby">sort by:</label>
-            <select name="sortby" id="sortby" class="form-control" required>
+            <select
+              name="sortby"
+              id="sortby"
+              class="form-control"
+              placeholder="select category"
+              required
+            >
+              <option value="" disabled selected hidden>Category</option>
               <option value="shape">shape</option>
               <option value="city">city</option>
             </select>
@@ -63,12 +69,19 @@
               name="sortOrder"
               id="sortOrder"
               class="form-control"
+              placeholder="select category"
               required
             >
+              <option value="" disabled selected hidden>Order</option>
               <option value="asc">ascending</option>
               <option value="desc">descending</option>
             </select>
-            <input type="submit" value="Submit" />
+            <input
+              type="submit"
+              value="Submit"
+              class="btn btn-primary"
+              id="sort-button"
+            />
           </form>
         </div>
       </div>
@@ -76,13 +89,13 @@
 
     <div class="container" id="sightings-list-container">
       <div class="row justify-content-center">
-        <div class="col-10">
+        <div class="col-12">
           <h1 id="sighting-list-header">Sightings List</h1>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-5">
+      <div class="row justify-content-center">
+        <div class="col-3">
           <h4>Date</h4>
         </div>
         <div class="col-3">
@@ -91,13 +104,19 @@
         <div class="col-3">
           <h4>City</h4>
         </div>
-        <div class="col-1"></div>
+        <div class="col-2"></div>
       </div>
+    </div>
 
-      <% sightings.forEach((element) => { %>
-      <div class="row">
-        <div class="col-5">
-          <p><%= element.date_time %></p>
+    <div class="container overflow-auto" id="sightings-items-container">
+      <% sightings.forEach((element, index) => { %>
+      <div class="row justify-content-center sightings">
+        <div class="col-3">
+          <p>
+            <a class="badge badge-light" href="/sighting/<%= index %> "
+              ><%= element.date_time %></a
+            >
+          </p>
         </div>
         <div class="col-3">
           <p><%= element.shape %></p>
@@ -105,12 +124,16 @@
         <div class="col-3">
           <p><%= element.city %></p>
         </div>
-        <div class="col-1">
+        <div class="col-2">
           <form
             action="sighting/<%= element.index %>/delete?_method=DELETE"
             method="POST"
           >
-            <input type="submit" value="Delete" />
+            <input
+              type="submit"
+              value="Delete"
+              class="btn btn-danger delete-button"
+            />
           </form>
         </div>
       </div>

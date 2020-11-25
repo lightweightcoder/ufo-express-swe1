@@ -152,8 +152,6 @@ app.get('/', (request, response) => {
       console.log('sorting done!');
     }
 
-    console.log(data.sightings);
-
     // render the form, pass in the template data
     response.render('main-page', data);
   });

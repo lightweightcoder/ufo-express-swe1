@@ -1,23 +1,17 @@
 body {
-  padding-top: 70px;
+  padding-top: 60px;
   padding-bottom: 40px;
+  background-color: rgb(99, 224, 49);
 }
 
-#sighting-shapes-header {
+#sighting-shapes-list {
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center;
 }
 
-#sighting-shapes-header-container {
-  margin-top: 30px;
-}
-
-#sighting-shapes-list-container {
-  margin-top: 30px;
-  background: lightgreen;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
 #shape-list-items {
+  list-style-type: none;
   margin-bottom: 0;
+  padding-left: 0;
 }
